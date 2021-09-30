@@ -1,7 +1,7 @@
 ---
 title: "Lab 6"
 author: "Your Name"
-date: "9/30/2021"
+date: "10/05/2021"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -14,9 +14,13 @@ dat <- read.csv("C:/Users/ericg/UCF/github/lab-06/data/glopnet_dat.csv", na.stri
 
 ## Instructions
 
-- Before beginning this assignment, go ahead and Save As, replacing lastname and firstname with your name, followed by `_lab_06.Rmd`.
-- Enter your name for author at the top of this document (where it says `author: "Your Name"`).
-- If you'd like, use the visual markdown editor by clicking the top-right button of this document (the one that looks sort of like an A).
+1. Before beginning this assignment, rename the file by following these steps:
+  - From the Files tab in the bottom right RStudio pane, check the box for `lastname_firstname_lab_06.Rmd`. Then, click Rename.
+  - Replace lastname and firstname with your last and first name, followed by `_lab_06.Rmd`. Then click OK.
+  - (Alternatively, you can click File --> Save As. However, this creates a copy of the file, so after saving a new name, you'll need to delete the original file `lastname_firstname_lab_06.Rmd`).
+2. Enter your name for author at the top of this document (where it says `author: "Your Name"`).
+3. If you'd like, use the visual markdown editor by clicking the top-right button of this document (the one that looks sort of like an A).
+4. Read the introduction, and click on the link to take a look at the Nature paper that is references. Then, follow the directions to complete the problems below.
 
 ## Introduction
 
