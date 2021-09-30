@@ -1,0 +1,108 @@
+---
+title: "Lab 6"
+author: "Your Name"
+date: "9/30/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+dat <- read.csv("C:/Users/ericg/UCF/github/lab-06/data/glopnet_dat.csv", na.strings="")
+```
+
+## Instructions
+
+- Before beginning this assignment, go ahead and Save As, replacing lastname and firstname with your name, followed by `_lab_06.Rmd`.
+- Enter your name for author at the top of this document (where it says `author: "Your Name"`).
+- If you'd like, use the visual markdown editor by clicking the top-right button of this document (the one that looks sort of like an A).
+
+## Introduction
+
+The GLOPNET database, originally [published in Nature by Wright et al. 2004](https://www.nature.com/articles/nature02403), is a plant trait dataset consisting of over 2548 plants reprsenting 2022 plant species from across the world (175 field sites total). The dataset includes **categorical** information, such as whether the species is deciduous or evergreen, biome information, etc., as well as **continuous** trait data, including leaf traits like leaf mass per area (LMA), leaf nitrogen concentration (Nmass, Narea), photosynthetic rate (Amass, Aarea), and much more. Many of the traits are expressed on a log10-scale, and are expressed relative to leaf dry mass (e.g. Nmass, Amass) or fresh leaf area (Narea, Aarea). The Wright et al. paper describes a global correlation of these plant traits that make up the so-called "worldwide leaf economics spectrum" (WLES). The WLES is an economic metaphor for thinking about plant carbon investment in building a leaf ("investment") versus the photosynthetic output ("return on investment"). Plants can adopt a "fast" (i.e. "get-rich-quick") strategy with cheap, disposable leaves with a short leaf lifespan (LL), low LMA, and high photosynthetic rate and nutrient concentration; alternatively, plants can adopt a "slow" strategy with more durable, "expensive", longer-lasting leaves that have a long LL, high LMA, with lower photosynthetic rates and nutrient concentrations. In other words, the WLES suggests a trade-off between leaf productivity rate vs leaf durability.
+
+## Problems
+
+1. Use ggplot to visualize the relationship between logNmass and logAmass.
+
+- Note that the dataset contains missing values for certain traits, so be sure to suppress the warning message by setting warning=FALSE in the R code chunk below.
+- Alternatively: if you'd like to avoid typing this for every code chunk with a warning, you can set `knitr::opts_chunk$set(warning = FALSE)` in the `setup` chunk at the top of this document.
+  - This will suppress warnings for all code chunks when knitting the document (you may still see a warning when previewing the code -- that's OK).
+
+```{r}
+
+```
+
+2. Let's avoid having to type the code from #1 over and over again. In the R code chunk below, copy and paste your code from number 1, but this time, store it in an R object. After storing the gpplot in an R object, on the next line, simply type the name of the R object to plot the figure again.
+
+- You can choose the object name, but it's a good idea to make it informative so your code is easier to read.
+  - For instance, `Nmass_vs_Amas` would be an informative name.
+  - On the other hand, when feeling lazy, I usually just say `g <- ` for storing ggplots).
+  - The output will appear the same regardless, but it's *better* in general to use an informative name.
+  
+```{r}
+
+```
+
+3. Re-plot the figure using your R object from #2, but this time, change the theme to something you like better than the default setting (which is `theme_gray()`).
+
+- There are two ways of doing this.
+ - If you want the new theme to be permanent, you can overwrite the R object with the new theme, and then plot it
+ - If you'd prefer to only plt the new theme for #3 (i.e. if you happen to like the default `theme_gray()` best), you can simply type the R object name, then a plus sign, and then the theme function.
+
+```{r}
+
+```
+
+4. Plot your figure, but this time, color-code the data points with the variable `decid_evergreen`.
+
+- There are two ways of doing this.
+ - You can either copy and paste the code from #1, and add `color` as an argument to the `aes` function.
+ - Or you can type the name of your R object, then a plus sign, and then the `aes` function with `color` as an argument.
+```{r}
+
+```
+
+5. Notice there are 3 colors in the #4 plot. The first color corresponds to `D` for deciduous, the second color corresponds to `E` for evergreen, and the third color correponds to missing data. Either the data was unavailable for that species, or the species was neither deciduous nor evergreen. **For this problem**:
+
+- For every value of `dat$decid_evergreen` with an empty cell, replace it with the word `Other / Unavailable`.
+  - This will require you to subset using a logical vector.
+  - Specifically, you must whether a cell has missing data. For this, you can use the `is.na()` function. For example:
+   - `is.na(dat$decid_evergreen)`
+  - Overwrite the subset of `dat$decid_evergreen` where the values of `is.na(dat$decid_evergreen)` are `TRUE` with the word `Other`.
+- Next, replace every instance of `E` with the word `Evergreen` and every instance of `D` with `Deciduous`.
+- Now that you have successfully edited the `dat$decis_evergreen` column, you must update the `data` argument. Otherwise, your changes won't be in the new plot.
+ - Example instructions: If your plot was named `g`, you would use the code `g$data <- dat`.
+- Finally, copy and paste the code from #4 to re-plot the figure. Now, the three colors in the legend should be listed as `Deciduous`, `Evergreen`, and `Other / Unavailable`.
+
+```{r}
+
+```
+
+6. Paste the code from #4 again, and use the labs function to replace `decid_evergreen` with `Plant Type`. Also, replace `logNmass` with `log-10 Nmass` and replace `logAmass` with `log-10 Amass`. Add a title that says `Worldwide Leaf Economics Spectrum`
+
+```{r}
+
+```
+
+7. Make a new plot, and store it in an R object (with the name of your choice).
+
+- Color-code the plants according to the variable `C3C4`.
+  - Before plotting, you'll need to replace the NA values in `C3C4` with `Other / Unavailable`, as you did in #5.
+- Plot decid_evergreen using shape (instead of color).
+- This time, plot the relationship between `logNmass` and `logLL` (leaf lifespan).
+- Edit the x-axis label and y-axis label appropriately. 
+- Increase the size of the points in the scatterplot.
+
+```{r}
+
+```
+
+8. Make a new plot. This time, plot the relationship between `logLMA` and `logAmass`. Set the color of the points in the scatterplot to `"grey"`. Add a `geom_smooth` to the plot, with the lines color-coded by `BIOME`.
+
+```{r}
+
+```
+
+9. When you are finished, save the document, knit the document, commit your changes, and push the changes to your repository. Be sure to add me as as a collaborator on GitHub, and then submit the URL to your reposiotry in Webcourses for the Lab 6 assignment.
