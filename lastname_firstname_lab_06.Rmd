@@ -9,7 +9,7 @@ editor_options:
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-dat <- read.csv("C:/Users/ericg/UCF/github/lab-06/data/glopnet_dat.csv", na.strings="")
+dat <- read.csv("data/glopnet_dat.csv", na.strings="")
 ```
 
 ## Instructions
