@@ -1,7 +1,7 @@
 ---
 title: "Lab 6"
-author: "Your Name"
-date: "10/05/2021"
+author: "Hannah Stanfor"
+date: "10/08/2021"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -35,6 +35,10 @@ The GLOPNET database, originally [published in Nature by Wright et al. 2004](htt
   - This will suppress warnings for all code chunks when knitting the document (you may still see a warning when previewing the code -- that's OK).
 
 ```{r}
+library(ggplot2)
+ggplot(dat, aes(logNmass, logAmass))+
+  geom_point()+
+  geom_smooth(method = lm)
 
 ```
 
@@ -46,7 +50,10 @@ The GLOPNET database, originally [published in Nature by Wright et al. 2004](htt
   - The output will appear the same regardless, but it's *better* in general to use an informative name.
   
 ```{r}
-
+library(ggplot2)
+codetemplate <- ggplot(dat, aes(logNmass, logAmass))+
+  geom_point()+
+  geom_smooth(method = lm)+
 ```
 
 3. Re-plot the figure using your R object from #2, but this time, change the theme to something you like better than the default setting (which is `theme_gray()`).
@@ -56,7 +63,8 @@ The GLOPNET database, originally [published in Nature by Wright et al. 2004](htt
  - If you'd prefer to only plt the new theme for #3 (i.e. if you happen to like the default `theme_gray()` best), you can simply type the R object name, then a plus sign, and then the theme function.
 
 ```{r}
-
+codetemplate +
+  theme_light()
 ```
 
 4. Plot your figure, but this time, color-code the data points with the variable `decid_evergreen`.
@@ -65,7 +73,8 @@ The GLOPNET database, originally [published in Nature by Wright et al. 2004](htt
  - You can either copy and paste the code from #1, and add `color` as an argument to the `aes` function.
  - Or you can type the name of your R object, then a plus sign, and then the `aes` function with `color` as an argument.
 ```{r}
-
+ggplot(dat, aes(logNmass, logAmass, color = decid_evergreen))+
+  geom_point()
 ```
 
 5. Notice there are 3 colors in the #4 plot. The first color corresponds to `D` for deciduous, the second color corresponds to `E` for evergreen, and the third color correponds to missing data. Either the data was unavailable for that species, or the species was neither deciduous nor evergreen. **For this problem**:
@@ -82,12 +91,17 @@ The GLOPNET database, originally [published in Nature by Wright et al. 2004](htt
 
 ```{r}
 
+dat[is.na(dat$decid_evergreen)] 
+
+
 ```
 
 6. Paste the code from #4 again, and use the labs function to replace `decid_evergreen` with `Plant Type`. Also, replace `logNmass` with `log-10 Nmass` and replace `logAmass` with `log-10 Amass`. Add a title that says `Worldwide Leaf Economics Spectrum`
 
 ```{r}
-
+ggplot(dat, aes(log-10Nmass, log-10Amass, color = decid_evergreen))+
+  geom_point()+
+  labs(title = "Worldwide Leaf Economics Spectrum")
 ```
 
 7. Make a new plot, and store it in an R object (with the name of your choice).
