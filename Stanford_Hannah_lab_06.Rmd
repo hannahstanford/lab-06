@@ -53,7 +53,8 @@ ggplot(dat, aes(logNmass, logAmass))+
 library(ggplot2)
 codetemplate <- ggplot(dat, aes(logNmass, logAmass))+
   geom_point()+
-  geom_smooth(method = lm)+
+  geom_smooth(method = lm)
+codetemplate
 ```
 
 3. Re-plot the figure using your R object from #2, but this time, change the theme to something you like better than the default setting (which is `theme_gray()`).
@@ -73,7 +74,7 @@ codetemplate +
  - You can either copy and paste the code from #1, and add `color` as an argument to the `aes` function.
  - Or you can type the name of your R object, then a plus sign, and then the `aes` function with `color` as an argument.
 ```{r}
-ggplot(dat, aes(logNmass, logAmass, color = decid_evergreen))+
+plot1 <- ggplot(dat, aes(logNmass, logAmass, color = decid_evergreen))+
   geom_point()
 ```
 
@@ -90,18 +91,22 @@ ggplot(dat, aes(logNmass, logAmass, color = decid_evergreen))+
 - Finally, copy and paste the code from #4 to re-plot the figure. Now, the three colors in the legend should be listed as `Deciduous`, `Evergreen`, and `Other / Unavailable`.
 
 ```{r}
-
-dat[is.na(dat$decid_evergreen)] 
-
+dat$decid_evergreen[is.na(dat$decid_evergreen)] <- "Other/Unavailable"
+dat$decid_evergreen[dat$decid_evergreen == "E"] <- "Evergreen"
+dat$decid_evergreen[dat$decid_evergreen == "D"] <- "Deciduous"
+dat$decid_evergreen
+plot1$data <- dat
 
 ```
 
 6. Paste the code from #4 again, and use the labs function to replace `decid_evergreen` with `Plant Type`. Also, replace `logNmass` with `log-10 Nmass` and replace `logAmass` with `log-10 Amass`. Add a title that says `Worldwide Leaf Economics Spectrum`
 
 ```{r}
-ggplot(dat, aes(log-10Nmass, log-10Amass, color = decid_evergreen))+
+plot1 <- ggplot(dat, aes(logNmass, logAmass, color = decid_evergreen))+
   geom_point()+
-  labs(title = "Worldwide Leaf Economics Spectrum")
+  labs(x = "log-10Amass", y = "log-10Amass", color = "Plant Type", title = "Worldwide Leaf Economics Spectrum")
+plot1
+
 ```
 
 7. Make a new plot, and store it in an R object (with the name of your choice).
@@ -114,13 +119,20 @@ ggplot(dat, aes(log-10Nmass, log-10Amass, color = decid_evergreen))+
 - Increase the size of the points in the scatterplot.
 
 ```{r}
-
+dat$C3C4[is.na(dat$C3C4)] <- "Other/Unavailable"
+newplot <- ggplot(dat, aes(logNmass,logLL, shape = decid_evergreen))+
+  geom_point(size = 1.5)+
+  labs(x = "logNmass", y = "Leaf Lifespan", shape = "Plant Type", title ="Worldwide Leaf Economics Spectrum")
+newplot
 ```
 
 8. Make a new plot. This time, plot the relationship between `logLMA` and `logAmass`. Set the color of the points in the scatterplot to `"grey"`. Add a `geom_smooth` to the plot, with the lines color-coded by `BIOME`.
 
 ```{r}
-
+newplot2 <- ggplot(dat, aes(logLMA,logAmass, color = BIOME))+
+  geom_point(color = "grey")+
+  geom_smooth()
+newplot2
 ```
 
 9. When you are finished, save the document, knit the document, commit your changes, and push the changes to your repository. Be sure to add me as as a collaborator on GitHub, and then submit the URL to your reposiotry in Webcourses for the Lab 6 assignment.
